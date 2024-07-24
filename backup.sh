@@ -3,7 +3,7 @@ echo "Starting PostgreSQL backup to S3..."
 echo "Setup minio client..."
 mc alias set s3 ${S3_ENDPOINT} ${S3_ACCESSKEY} ${S3_SECRETKEY}
 echo "Backup database..."
-PGPASSWORD=${PSQL_PASS} pg_dump -h ${PSQL_HOST} -U ${PSQL_USER}  -C ${PSQL_NAME} > /backups/backup.sql
+PGPASSWORD=${!PSQL_PASS} pg_dump -h ${PSQL_HOST} -U ${PSQL_USER}  -C ${PSQL_NAME} > /backups/backup.sql
 echo "Compress backup..."
 gzip /backups/backup.sql
 echo "Copy to S3..."

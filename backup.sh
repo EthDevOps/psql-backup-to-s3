@@ -9,7 +9,7 @@ PGPASSWORD=${!PSQL_PASS} pg_dump -h ${PSQL_HOST} -U ${PSQL_USER}  -C ${PSQL_NAME
 echo "Compress backup..."
 gzip /backups/backup.sql
 echo "Encrypt backup..."
-gpg --encrypt --recipient ${GPG_KEYID} -o /backups/backup.sql.gz.gpg /backups/backup.sql.gz
+gpg --no-tty --encrypt --recipient ${GPG_KEYID} -o /backups/backup.sql.gz.gpg /backups/backup.sql.gz
 echo "Copy to S3..."
 mc cp /backups/backup.sql.gz.gpg s3/${S3_BUCKET}/db-${PSQL_NAME}-$(date "+%Y-%m-%dT%H-%M-%S").sql.gz.gpg
 echo "Notify HC..."

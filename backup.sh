@@ -9,5 +9,5 @@ gzip /backups/backup.sql
 echo "Copy to S3..."
 mc cp /backups/backup.sql.gz s3/${S3_BUCKET}/db-${PSQL_NAME}-$(date "+%Y-%m-%dT%H-%M-%S").sql.gz
 echo "Notify HC..."
-curl ${HC_UR}
+curl ${HC_URL}
 echo "done."
